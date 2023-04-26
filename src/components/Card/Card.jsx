@@ -1,10 +1,10 @@
 import styles from './Card.module.css';
 
 export default function Card(props) {
-   const{name, status, species, gender, origin, image, onClose}=props;
+   const{name, id, status, species, gender, origin, image, onClose}=props;
    return (
       <div className={styles.wrapperCard}>
-         <button className={styles.btn} onClick={onClose}>X</button>
+         <button className={styles.btn} onClick={() => {onClose(id)}}>X</button>
          <img className={styles.img} src={image} alt='character image' />
          <div>
          <h2 className={styles.name}> {name}</h2>
