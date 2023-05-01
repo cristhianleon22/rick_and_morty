@@ -1,9 +1,12 @@
 .App {
-   /* text-align: center; */
-   width: rem;
-   height: rem;
-   background-image: url('./images/pxfuel.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
-   
+   width: 100vw;
+   height: 100vh;
+  text-align: center;
+  background-image: URL("./images/pxfuel.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+body{
+   background-image: URL("./images/pxfuel.jpg");
 }
