@@ -1,3 +1,4 @@
+import PathRoutes from "./components/helpers/Routes.heper.js"
 //commons imports
 import { useState } from "react";
 import axios from "axios";
@@ -8,9 +9,9 @@ import Cards from "./components/Cards/Cards.jsx";
 import NavBar from "./components/NavBAr/NavBar.jsx";
 import About from "./components/About/About.jsx";
 import Detail from "./components/Detail/Detail.jsx";
+import Form from "./components/Form/From.jsx";
 // router-dom
 import { Routes, Route } from "react-router-dom";
-import PathRoutes from "./components/helpers/Routes.heper.js"
 
 
 
@@ -46,6 +47,7 @@ function App() {
      
         <NavBar onSearch={onSearch} />
         <Routes>
+        <Route path={'/'} element={<Form />}/>,
           <Route
             path={PathRoutes.HOME} element={<Cards characters={characters} onClose={onClose} />}/>,
           <Route path={PathRoutes.ABOUT} element={<About />}/>,

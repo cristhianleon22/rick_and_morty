@@ -8,8 +8,12 @@ const NavBar= (props) =>{
     const {onSearch}=props
     return(
         <div>
-            <Link to='/home'> home </Link>
-            <Link to='/about'>About</Link>
+            <Link to='/home'> 
+            <button>Home</button> 
+             </Link>
+            <Link to='/about'>
+            <button>About</button> 
+                </Link>
 
             <SearchBar onSearch={onSearch}/>
         </div>
