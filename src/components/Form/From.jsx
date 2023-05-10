@@ -1,16 +1,61 @@
-import React from "react";
+import { useState } from "react";
 import styles from "./Form.module.css";
+import validation from "./validation.js";
 
-export const Form = () => {
+export const Form = (props) => {
+  const {login} = props;
+  const [userData, setUserData] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+    setErrors(validation({  ...userData, [e.target.name]: e.target.value  }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(userData);
+  }
+
   return (
-    <div>
-      <form action="">
-        {/* USERNAE */}
-        <lavel htmlFor=""></lavel>
-        <input type="text" />
+    <div className={styles.form}>
+      <form onSubmit={handleSubmit}>
+        {/* USERNAME */}
+        <lavel htmlFor="" className={styles.user}>
+          EMAIL
+        </lavel>
+        <input
+          type="text"
+          placeholder="EMAIIL..."
+          name="email"
+          onChange={handleChange}
+          value={userData.mail}
+        />
+
+        {
+          errors.e1 ?(<p>{errors.e1}</p>)
+          : errors.e2 ?(<p>{errors.e2}</p>)
+          :(<p>{errors.e3}</p>)
+        }
+
+    
+
         {/* PASSWORD */}
-        <lavel htmlFor=""></lavel>
-        <input type="text" />
+        <lavel htmlFor="" className={styles.user}>
+          PASSWORD
+        </lavel>
+        <input
+          type="password"
+          placeholder="PASSWORD..."
+          name="password"
+          onChange={handleChange}
+          value={userData.password}
+        />
+
+        {
+          errors.p1 ?(<p>{errors.p1}</p>)
+          :(<p>{errors.p2}</p>)
+        }
 
         <button>LOGIN</button>
       </form>

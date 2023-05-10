@@ -1,6 +1,6 @@
-import PathRoutes from "./components/helpers/Routes.heper.js"
+import PathRoutes from "./components/helpers/Routes.heper.js";
 //commons imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 //Styles
 import "./App.css";
@@ -11,12 +11,26 @@ import About from "./components/About/About.jsx";
 import Detail from "./components/Detail/Detail.jsx";
 import Form from "./components/Form/From.jsx";
 // router-dom
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
+const EMAIL = "ejemplo@gmail.com";
+const PASSWORD = "1Password";
 
 
 function App() {
+  const navigate = useNavigate();
+  const [access, setAccess] = useState(false);
+
+  function login(userData) {
+    if (userData.password === PASSWORD && userData.email === EMAIL) {
+       setAccess(true);
+       navigate('/home');
+    }
+ }
+
   const [characters, setCharacters] = useState([]);
+
+  const { pathname } = useLocation();
 
   const onSearch = (id) => {
     axios(`https://rickandmortyapi.com/api/character/${id}`).then(
@@ -37,6 +51,15 @@ function App() {
     setCharacters(characterFiltered);
   };
 
+  function login(userData) {
+    if (userData.password === PASSWORD && userData.email === EMAIL) {
+      setAccess(true);
+      navigate("/home");
+    }
+  }
+
+  
+
   return (
     // <div className="App">
     //   <NavBar onSearch={onSearch} />
@@ -44,17 +67,18 @@ function App() {
     // </div>
 
     <div className="App">
-     
-        <NavBar onSearch={onSearch} />
-        <Routes>
-        <Route path={'/'} element={<Form />}/>,
-          <Route
-            path={PathRoutes.HOME} element={<Cards characters={characters} onClose={onClose} />}/>,
-          <Route path={PathRoutes.ABOUT} element={<About />}/>,
-          <Route path={PathRoutes.DETAIL} element={<Detail />} />
+      {pathname !== "/" && <NavBar onSearch={onSearch} />}
 
-        </Routes>
-     
+      <Routes>
+        <Route path={"/"} element={<Form login={login}/>} />,
+        <Route
+          path={PathRoutes.HOME}
+          element={<Cards characters={characters} onClose={onClose} />}
+        />
+        ,
+        <Route path={PathRoutes.ABOUT} element={<About />} />,
+        <Route path={PathRoutes.DETAIL} element={<Detail />} />
+      </Routes>
     </div>
   );
 }
